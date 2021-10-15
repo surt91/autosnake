@@ -1,0 +1,14 @@
+# Autosnake
+
+## Setup
+
+`mvn package`
+to build the Java part with Maven
+`java -jar target/autosnake-1.0-SNAPSHOT.jar`
+to run it
+
+`pip install -r requirements.txt`
+(preferably in a virtual env)
+
+`python3 train_AC.py`
+for training

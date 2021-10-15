@@ -13,6 +13,7 @@ public class SnakeLogic {
     ArrayDeque<Coordinate> tail;
     int length;
     Coordinate food;
+    boolean gameOver;
     private final Random random;
 
     public SnakeLogic(int width, int height) {
@@ -85,7 +86,7 @@ public class SnakeLogic {
         return rad;
     }
 
-    public List<Integer> trainingState(int idx) {
+    public List<Integer> trainingState() {
         ArrayList<Integer> state = new ArrayList<>();
 
         double rad = angle(head, headDirection, food);
@@ -152,7 +153,7 @@ public class SnakeLogic {
     }
 
     public void kill() {
-        reset();
+        gameOver = true;
     }
 
     public void reset() {
@@ -160,11 +161,15 @@ public class SnakeLogic {
         head = randomSite();
         tail.clear();
         length = 2;
+        gameOver = false;
 
         add_food();
     }
 
     public void update() {
+        if(gameOver) {
+            return;
+        }
 //        snake.ai().ifPresent(autopilot -> snake.headDirection = autopilot.suggest(this, snake));
 
         Coordinate offset = headDirection.toCoord();
@@ -186,5 +191,13 @@ public class SnakeLogic {
         }
 
         head = next;
+    }
+
+    public Coordinate getHead() {
+        return head;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }
