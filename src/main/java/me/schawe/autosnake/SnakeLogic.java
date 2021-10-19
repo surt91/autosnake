@@ -16,6 +16,7 @@ public class SnakeLogic {
     boolean gameOver;
     private final Random random;
     Autopilot autopilot = null;
+    private double eps = 1e-6;
 
     public SnakeLogic(int width, int height) {
         this(width, height, null);
@@ -60,11 +61,8 @@ public class SnakeLogic {
         food = randomSite();
     }
 
-    public int danger(Coordinate c) {
-        if(isOccupied(c) || isWall(c)) {
-            return 1;
-        }
-        return 0;
+    public Boolean danger(Coordinate c) {
+        return isOccupied(c) || isWall(c);
     }
 
     double angle(Coordinate subject, Move direction, Coordinate object) {
@@ -95,48 +93,40 @@ public class SnakeLogic {
         return rad;
     }
 
-    public List<Integer> trainingState() {
-        ArrayList<Integer> state = new ArrayList<>();
+    private boolean isFoodFront(double rad) {
+        return Math.abs(rad) < Math.PI / 2 - eps;
+    }
 
-        double rad = angle(head, headDirection, food);
-        double eps = 1e-6;
+    private boolean isFoodLeft(double rad) {
+        return rad > eps && rad < Math.PI - eps;
+    }
 
-        // is food in front?
-        if (Math.abs(rad) < Math.PI / 2 - eps) {
-            state.add(1);
-        } else {
-            state.add(0);
-        }
+    private boolean isFoodRight(double rad) {
+        return rad < -eps && rad > -Math.PI + eps;
+    }
 
-        // is food left?
-        if (rad > eps && rad < Math.PI - eps) {
-            state.add(1);
-        } else {
-            state.add(0);
-        }
+    private boolean isFoodBack(double rad) {
+        return Math.abs(rad) > Math.PI/2. + eps;
+    }
 
-        // is food right?
-        if (rad < -eps && rad > -Math.PI + eps) {
-            state.add(1);
-        } else {
-            state.add(0);
-        }
+    public boolean[] trainingState() {
+        boolean[] state = new boolean[7];
 
-        // is food behind?
-        if (Math.abs(rad) > Math.PI/2. + eps) {
-            state.add(1);
-        } else {
-            state.add(0);
-        }
+        double alpha = angle(head, headDirection, food);
+
+        state[0] = isFoodFront(alpha);
+        state[1] = isFoodLeft(alpha);
+        state[2] = isFoodRight(alpha);
+        state[3] = isFoodBack(alpha);
 
         Coordinate straight = headDirection.toCoord();
         Coordinate left = headDirection.rLeft().toCoord();
         Coordinate right = headDirection.rRight().toCoord();
 
         // first neighbors
-        state.add(danger(head.add(left)));
-        state.add(danger(head.add(straight)));
-        state.add(danger(head.add(right)));
+        state[4] = danger(head.add(left));
+        state[5] = danger(head.add(straight));
+        state[6] = danger(head.add(right));
         // omit back, its always occupied
 
         return state;
