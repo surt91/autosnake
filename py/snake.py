@@ -35,12 +35,6 @@ class Snake:
 
         return state, reward, done
 
-    def state_size(self):
-        return len(self.snakeLogic.trainingState())
-
-    def action_size(self):
-        return 3
-
     # simple visualization to watch the training
     def render(self):
         import pygame_sdl2 as pygame
