@@ -14,8 +14,6 @@ class Snake:
         width, height = 10, 10
         self.snakeLogic = SnakeLogic(width, height)
 
-        self.state = []
-
     def reset(self):
         self.snakeLogic.reset()
 
@@ -26,7 +24,6 @@ class Snake:
         self.snakeLogic.update()
 
         state = self.snakeLogic.trainingState()
-        self.state = state
 
         done = False
         reward = 0
