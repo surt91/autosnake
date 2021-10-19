@@ -1,6 +1,14 @@
-import numpy as np
 import pygame_sdl2 as pygame
-from py4j.java_gateway import JavaGateway
+
+import jpype
+import jpype.imports
+from jpype.types import *
+
+# Launch the JVM
+jpype.startJVM(classpath=['../../../target/autosnake-1.0-SNAPSHOT.jar'])
+
+# import the Java module
+from me.schawe.autosnake import SnakeLogic
 
 
 class Snake:
@@ -9,12 +17,10 @@ class Snake:
         if vis:
             pygame.init()
 
-        gateway = JavaGateway()
-        self.snakeLogic = gateway.entry_point.getSnakeLogic()
-        gateway.jvm.java.lang.System.out.println('Connected to Python!')
+        width, height = 10, 10
+        self.snakeLogic = SnakeLogic(width, height)
 
         self.state = []
-
 
     def reset(self):
         self.snakeLogic.reset()
@@ -45,10 +51,10 @@ class Snake:
         pygame.draw.rect(
             screen,
             [140, 230, 140],
-            [scale * self.getHead().getX(), scale * self.getHead().getY(), scale, scale]
+            [scale * self.snakeLogic.getHead().getX(), scale * self.snakeLogic.getHead().getY(), scale, scale]
         )
 
-        for i in self.snake.getTailAsList():
+        for i in self.snakeLogic.getTail():
             pygame.draw.rect(
                 screen,
                 [80, 230, 80],

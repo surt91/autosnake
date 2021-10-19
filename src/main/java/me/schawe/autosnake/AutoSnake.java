@@ -26,9 +26,6 @@ public class AutoSnake extends JFrame {
     }
 
     public static void main(String[] args) {
-
-        PythonEntry.run();
-
         EventQueue.invokeLater(() -> {
             AutoSnake ex = new AutoSnake();
             ex.setVisible(true);
