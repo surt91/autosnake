@@ -12,7 +12,7 @@ public class AutoSnake extends JFrame {
     public AutoSnake() {
         int w = 10;
         int h = 10;
-        this.snakeLogic = new SnakeLogic(w, h, "models/snakeAC_e1200.h5");
+        this.snakeLogic = new SnakeLogic(w, h, "models/snakeAC.h5");
         initUI(w, h);
         mainLoop(50);
     }
