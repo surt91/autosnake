@@ -1,5 +1,3 @@
-import pygame_sdl2 as pygame
-
 import jpype
 import jpype.imports
 from jpype.types import *
@@ -12,11 +10,7 @@ from me.schawe.autosnake import SnakeLogic
 
 
 class Snake:
-    def __init__(self, vis):
-        self.vis = vis
-        if vis:
-            pygame.init()
-
+    def __init__(self):
         width, height = 10, 10
         self.snakeLogic = SnakeLogic(width, height)
 
@@ -27,9 +21,33 @@ class Snake:
 
         return self.snakeLogic.trainingState()
 
+    def step(self, action):
+        self.snakeLogic.turnRelative(action)
+        self.snakeLogic.update()
+
+        state = self.snakeLogic.trainingState()
+        self.state = state
+
+        done = False
+        reward = 0
+        if self.snakeLogic.isGameOver():
+            reward = -1
+            done = True
+        elif self.snakeLogic.isEating():
+            reward = 1
+
+        return state, reward, done
+
+    def state_size(self):
+        return len(self.snakeLogic.trainingState())
+
+    def action_size(self):
+        return 3
+
+    # simple visualization to watch the training
     def render(self):
-        if not self.vis:
-            return
+        import pygame_sdl2 as pygame
+
         scale = 20
         w = self.snakeLogic.getWidth()
         h = self.snakeLogic.getHeight()
@@ -62,33 +80,3 @@ class Snake:
             )
 
         pygame.display.update()
-
-    def step(self, action):
-        self.snakeLogic.turnRelative(action)
-        self.snakeLogic.update()
-
-        state = self.snakeLogic.trainingState()
-        self.state = state
-
-        done = False
-        reward = 0
-        if self.snakeLogic.isGameOver():
-            reward = -1
-            done = True
-            if self.vis:
-                print("dead")
-        elif self.snakeLogic.isEating():
-            reward = 1
-            if self.vis:
-                print("nom", end=" ")
-
-        return state, reward, done
-
-    def state_size(self):
-        return len(self.snakeLogic.trainingState())
-
-    def action_size(self):
-        return 3
-
-    def max_reward(self):
-        return 150

@@ -23,7 +23,7 @@ vis = "vis" in sys.argv
 if not vis:
     print(f"If you want to see visualizations, call this script like `{sys.argv[0]} vis`")
 
-env = Snake(vis)  # Create the environment
+env = Snake()  # Create the environment
 eps = np.finfo(np.float32).eps.item()  # Smallest number such that 1.0 + eps != 1.0
 
 """
@@ -49,9 +49,8 @@ action = layers.Dense(num_actions, activation="softmax")(common)
 critic = layers.Dense(1)(common)
 
 # load a snapshot, if we have one
-saves = glob(f"{basename}_e*.keras")
+saves = glob(f"{basename}_e*.h5")
 if saves:
-
     latest = sorted(saves, key=lambda x: int(x.split(".")[0].split("_e")[1]))[-1]
     start = int(latest.split(".")[0].split("_e")[1])
     print(f"load `{latest}`")
@@ -78,7 +77,8 @@ while True:  # Run until solved
     episode_reward = 0
     with tf.GradientTape() as tape:
         for timestep in range(max_steps_per_episode):
-            env.render()
+            if vis:
+                env.render()
 
             state = tf.convert_to_tensor([state])
 
@@ -152,10 +152,14 @@ while True:  # Run until solved
         template = "running reward: {:.2f} at episode {}"
         print(template.format(running_reward, episode_count))
 
-    if episode_count == 100 or episode_count % 1000 == 0:
-        model.save(f"{basename}_e{episode_count}.keras")
+    # save snapshots to continue training
+    if episode_count % 300 == 0:
+        model.save(f"{basename}_e{episode_count}.h5")
 
-    if running_reward > env.max_reward():  # Condition to consider the task solved
+    # Condition to consider the task solved
+    # our local information is not enough to get really high scores, so 20 is already good
+    if running_reward > 20:
         print("Solved at episode {}!".format(episode_count))
+        model.save(f"{basename}.h5")
         break
 
