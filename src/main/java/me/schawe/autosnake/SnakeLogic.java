@@ -200,4 +200,28 @@ public class SnakeLogic {
     public boolean isGameOver() {
         return gameOver;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Coordinate getFood() {
+        return food;
+    }
+
+    public Move getHeadDirection() {
+        return headDirection;
+    }
+
+    public ArrayDeque<Coordinate> getTail() {
+        return tail;
+    }
+
+    public int getLength() {
+        return length;
+    }
 }
