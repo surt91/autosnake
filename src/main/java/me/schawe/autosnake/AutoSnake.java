@@ -12,8 +12,9 @@ public class AutoSnake extends JFrame {
     public AutoSnake() {
         int w = 10;
         int h = 10;
+
         this.snakeLogic = new SnakeLogic(w, h, "models/snakeAC.h5");
-        initUI(w, h);
+        initUI();
         mainLoop(50);
     }
 
@@ -30,7 +31,7 @@ public class AutoSnake extends JFrame {
         }, 0, period);
     }
 
-    private void initUI(int width, int height) {
+    private void initUI() {
         int scale = 20;
 
         panel = new SnakeBoard(snakeLogic, scale);

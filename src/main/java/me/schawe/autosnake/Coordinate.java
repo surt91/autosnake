@@ -21,11 +21,6 @@ public class Coordinate {
         return new Coordinate(x, y);
     }
 
-    public void addAssign(Coordinate other){
-        this.x += other.x;
-        this.y += other.y;
-    }
-
     public Coordinate add(Coordinate other){
         return new Coordinate(
                 this.x + other.x,

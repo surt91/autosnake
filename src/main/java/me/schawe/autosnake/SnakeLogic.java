@@ -33,7 +33,8 @@ public class SnakeLogic {
         reset();
     }
 
-    // TODO: replace by a cheaper method (hashmap of occupied sites?) But probably does not matter for performance
+    // TODO: replace by a cheaper method (hashmap or bitmap of occupied sites?)
+    //   But probably does not matter for performance yet
     public boolean isOccupied(Coordinate site) {
         return tail.stream().anyMatch(c -> c.equals(site)) || head.equals(site);
     }
@@ -141,7 +142,7 @@ public class SnakeLogic {
         return state;
     }
 
-    // this takes two ints, because this is the way my training on the python side works
+    // this takes an int, which is the output of the neural network
     public void turnRelative(int direction) {
         switch(direction) {
             case 0:
