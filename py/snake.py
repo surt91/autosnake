@@ -3,7 +3,7 @@ import jpype.imports
 from jpype.types import *
 
 # Launch the JVM
-jpype.startJVM(classpath=['../../../target/autosnake-1.0-SNAPSHOT.jar'])
+jpype.startJVM(classpath=['../target/autosnake-1.0-SNAPSHOT.jar'])
 
 # import the Java module
 from me.schawe.autosnake import SnakeLogic
