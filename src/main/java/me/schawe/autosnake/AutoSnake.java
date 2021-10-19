@@ -21,7 +21,6 @@ public class AutoSnake extends JFrame {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("update!");
                 if (snakeLogic.isGameOver()) {
                     snakeLogic.reset();
                 }
@@ -36,8 +35,7 @@ public class AutoSnake extends JFrame {
 
         panel = new SnakeBoard(snakeLogic, scale);
         add(panel);
-
-        setSize(width * scale, height * scale);
+        pack();
 
         setTitle("AutoSnake");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

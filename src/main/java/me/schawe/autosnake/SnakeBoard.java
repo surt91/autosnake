@@ -10,6 +10,8 @@ public class SnakeBoard extends JPanel {
     public SnakeBoard(SnakeLogic snake, int scale) {
         this.snake = snake;
         this.scale = scale;
+
+        this.setPreferredSize(new Dimension(snake.getWidth() * scale, snake.getHeight() * scale));
     }
 
     @Override
