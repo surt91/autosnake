@@ -15,13 +15,21 @@ public class SnakeLogic {
     Coordinate food;
     boolean gameOver;
     private final Random random;
+    Autopilot autopilot = null;
 
     public SnakeLogic(int width, int height) {
+        this(width, height, null);
+    }
+
+    public SnakeLogic(int width, int height, String autopilotModelPath) {
         this.width = width;
         this.height = height;
         head = new Coordinate(-1, -1);
         this.tail = new ArrayDeque<>();
         this.random = new Random();
+        if (autopilotModelPath != null) {
+            autopilot = new Autopilot(autopilotModelPath);
+        }
         reset();
     }
 
@@ -170,7 +178,11 @@ public class SnakeLogic {
         if(gameOver) {
             return;
         }
-//        snake.ai().ifPresent(autopilot -> snake.headDirection = autopilot.suggest(this, snake));
+
+        if (autopilot != null) {
+            int action = autopilot.nextMove(trainingState());
+            turnRelative(action);
+        }
 
         Coordinate offset = headDirection.toCoord();
 
