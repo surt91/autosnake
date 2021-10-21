@@ -1,4 +1,0 @@
-keras==2.6.0
-numpy==1.21.2
-jpype==1.3.0
-pygame_sdl2==2.1.0
