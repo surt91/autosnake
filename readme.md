@@ -1,4 +1,4 @@
-# Autosnake
+# autosnake
 
 This is a toy project to show how to use Python's machine learning ecosystem
 on logic implemented in Java classes. In this case to train an autopilot for
@@ -17,16 +17,19 @@ To try the code yourself, follow the instructions below.
 # tested with openJDK 11
 ./mvnw clean package
 
-# install the python (do this in a virtual environment, if you prefer)
+# install the python dependencies
+# (consider doing this in a virtual environment)
 pip install -r requirements.txt
 
 # train the model in Python using the Java classes
 cd py
 python3 train_AC.py
-# optionally copy one of the resulting *.h5 files to src/main/java/resources/models
+# optionally wait and copy the resulting *.h5 files to src/main/java/resources/models
+# it might take some time before the target score of 20 is reached
+# you might want to change it in line 139 of `py/train_AC.py`
 # cp snakeAC.h5 ../src/main/java/resources/models/
+cd ..
 
 # run the program using the (pre-)trained model
-cd ..
 java -jar target/autosnake-1.0-SNAPSHOT.jar
 ```
