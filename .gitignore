@@ -1,2 +1,6 @@
 target/
 .idea/
+
+__pycache__
+
+*.h5

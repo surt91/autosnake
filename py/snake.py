@@ -1,12 +1,22 @@
+import sys
+
 import jpype
 import jpype.imports
 from jpype.types import *
 
+# we expect that the current dir is py/
+
 # Launch the JVM
-jpype.startJVM(classpath=['../target/autosnake-1.0-SNAPSHOT.jar'])
+jpype.startJVM(classpath=['../target/classes'])
 
 # import the Java module
-from me.schawe.autosnake import SnakeLogic
+try:
+    from me.schawe.autosnake import SnakeLogic
+except ModuleNotFoundError:
+    print("Please compile the Java project before calling this script")
+    print("You can compile it by pasting the following into your terminal")
+    print("cd .. ; ./mvnw clean package ; cd -")
+    sys.exit(1)
 
 
 class Snake:
