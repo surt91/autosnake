@@ -94,7 +94,7 @@ while True:  # Run until solved
             action_probs_history.append(tf.math.log(action_probs[0, action]))
 
             # Apply the sampled action in our environment
-            state, reward, done = env.step(action)
+            state, reward, done, _ = env.step(action)
             rewards_history.append(reward)
             episode_reward += reward
 

@@ -33,7 +33,7 @@ class Snake:
         elif self.snakeLogic.isEating():
             reward = 1
 
-        return state, reward, done
+        return state, reward, done, {}
 
     # simple visualization to watch the training
     def render(self):
