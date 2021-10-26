@@ -28,6 +28,21 @@ public class Coordinate {
         );
     }
 
+    public Coordinate left(Move direction){
+        Coordinate left = direction.rLeft().toCoord();
+        return this.add(left);
+    }
+
+    public Coordinate straight(Move direction){
+        Coordinate straight = direction.toCoord();
+        return this.add(straight);
+    }
+
+    public Coordinate right(Move direction){
+        Coordinate right = direction.rRight().toCoord();
+        return this.add(right);
+    }
+
     public boolean equals(Coordinate other) {
         return this.x == other.x && this.y == other.y;
     }

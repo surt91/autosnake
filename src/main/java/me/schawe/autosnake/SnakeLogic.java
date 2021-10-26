@@ -117,14 +117,9 @@ public class SnakeLogic {
         state[2] = isFoodRight(alpha);
         state[3] = isFoodBack(alpha);
 
-        Coordinate straight = headDirection.toCoord();
-        Coordinate left = headDirection.rLeft().toCoord();
-        Coordinate right = headDirection.rRight().toCoord();
-
-        // first neighbors
-        state[4] = danger(head.add(left));
-        state[5] = danger(head.add(straight));
-        state[6] = danger(head.add(right));
+        state[4] = danger(head.left(headDirection));
+        state[5] = danger(head.straight(headDirection));
+        state[6] = danger(head.right(headDirection));
         // omit back, its always occupied
 
         return state;
