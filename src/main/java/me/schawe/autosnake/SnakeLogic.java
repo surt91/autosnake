@@ -4,17 +4,17 @@ import java.util.ArrayDeque;
 import java.util.Random;
 
 public class SnakeLogic {
-    int width;
-    int height;
-    Coordinate head;
-    Move headDirection;
-    ArrayDeque<Coordinate> tail;
-    int length;
-    Coordinate food;
-    boolean gameOver;
+    private final int width;
+    private final int height;
+    private Coordinate head;
+    private Move headDirection;
+    private final ArrayDeque<Coordinate> tail;
+    private int length;
+    private Coordinate food;
+    private boolean gameOver;
     private final Random random;
-    Autopilot autopilot = null;
-    private double eps = 1e-6;
+    private Autopilot autopilot = null;
+    private final double eps = 1e-6;
 
     public SnakeLogic(int width, int height) {
         this(width, height, null);
@@ -33,20 +33,20 @@ public class SnakeLogic {
     }
 
     // TODO: replace by a cheaper method (hashmap or bitmap of occupied sites?)
-    //   But probably does not matter for performance yet
+    //   But probably does not matter for performance here
     public boolean isOccupied(Coordinate site) {
         return tail.stream().anyMatch(c -> c.equals(site)) || head.equals(site);
     }
 
     public boolean isWall(Coordinate coordinate) {
-        return coordinate.x < 0 || coordinate.x >= width || coordinate.y < 0 || coordinate.y >= height;
+        return coordinate.getX() < 0 || coordinate.getX() >= width || coordinate.getY() < 0 || coordinate.getY() >= height;
     }
 
     public boolean isEating() {
         return head.equals(food);
     }
 
-    // FIXME: this will become an infinite loop after a perfect game
+    // FIXME: this will become an infinite loop after a perfect game, but this is good enough for the example
     private Coordinate randomSite() {
         Coordinate site;
         do {
@@ -55,15 +55,15 @@ public class SnakeLogic {
         return site;
     }
 
-    public void add_food() {
+    private void add_food() {
         food = randomSite();
     }
 
-    public Boolean danger(Coordinate c) {
+    private Boolean danger(Coordinate c) {
         return isOccupied(c) || isWall(c);
     }
 
-    double angle(Coordinate subject, Move direction, Coordinate object) {
+    private double angle(Coordinate subject, Move direction, Coordinate object) {
         double rad;
         double dx = object.getX() - subject.getX();
         double dy = object.getY() - subject.getY();

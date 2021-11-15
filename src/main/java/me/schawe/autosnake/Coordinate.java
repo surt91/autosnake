@@ -1,8 +1,8 @@
 package me.schawe.autosnake;
 
 public class Coordinate {
-    public int x;
-    public int y;
+    private final int x;
+    private final int y;
 
     public int getX() {
         return x;
@@ -12,9 +12,9 @@ public class Coordinate {
         return y;
     }
 
-    public Coordinate(int xi, int yi) {
-        x = xi;
-        y = yi;
+    public Coordinate(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public Coordinate copy() {

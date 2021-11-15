@@ -9,7 +9,7 @@ import org.nd4j.linalg.factory.Nd4j;
 
 // https://deeplearning4j.konduit.ai/deeplearning4j/how-to-guides/keras-import
 public class Autopilot {
-    ComputationGraph model;
+    private ComputationGraph model;
 
     public Autopilot(String pathToModel) {
         try {

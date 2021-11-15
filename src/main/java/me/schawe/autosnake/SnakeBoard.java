@@ -28,16 +28,16 @@ public class SnakeBoard extends JPanel {
 
     private void drawSnake(Graphics g) {
         g.setColor(colorBackground);
-        g.fillRect(0, 0, snake.width * scale, snake.height * scale);
+        g.fillRect(0, 0, snake.getWidth() * scale, snake.getHeight() * scale);
 
         g.setColor(colorFood);
-        g.fillRect(snake.food.getX() * scale, snake.food.getY() * scale, scale, scale);
+        g.fillRect(snake.getFood().getX() * scale, snake.getFood().getY() * scale, scale, scale);
 
         g.setColor(colorHead);
-        g.fillRect(snake.head.getX() * scale, snake.head.getY() * scale, scale, scale);
+        g.fillRect(snake.getHead().getX() * scale, snake.getHead().getY() * scale, scale, scale);
 
         g.setColor(colorTail);
-        for (Coordinate c : snake.tail) {
+        for (Coordinate c : snake.getTail()) {
             g.fillRect(c.getX() * scale, c.getY() * scale, scale, scale);
         }
     }

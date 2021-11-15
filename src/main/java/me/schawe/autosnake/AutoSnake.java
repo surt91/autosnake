@@ -6,8 +6,8 @@ import java.util.TimerTask;
 import javax.swing.*;
 
 public class AutoSnake extends JFrame {
-    SnakeLogic snakeLogic;
-    JPanel panel;
+    private final SnakeLogic snakeLogic;
+    private JPanel panel;
 
     public AutoSnake() {
         int w = 10;
@@ -18,7 +18,7 @@ public class AutoSnake extends JFrame {
         mainLoop(50);
     }
 
-    void mainLoop(int period) {
+    private void mainLoop(int period) {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
