@@ -55,7 +55,7 @@ public class SnakeLogic {
         return site;
     }
 
-    private void add_food() {
+    private void addFood() {
         food = randomSite();
     }
 
@@ -155,7 +155,7 @@ public class SnakeLogic {
         length = 2;
         gameOver = false;
 
-        add_food();
+        addFood();
     }
 
     public void update() {
@@ -174,7 +174,7 @@ public class SnakeLogic {
 
         if (isEating()) {
             length += 1;
-            add_food();
+            addFood();
         }
 
         while (tail.size() >= length + 1) {
