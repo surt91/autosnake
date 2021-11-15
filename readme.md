@@ -19,7 +19,7 @@ To try the code yourself, follow the instructions below.
 
 # install the python dependencies
 # (consider doing this in a virtual environment)
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 # train the model in Python using the Java classes
 cd py
