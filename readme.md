@@ -6,7 +6,7 @@ the classical game `snake`.
 
 ![Trained Snake](img/3000.gif)
 
-More details can be found in the accompanying blog post, which will follow soon.
+More details can be found in the accompanying [blog post](https://blog.codecentric.de/en/2021/11/java-classes-python/).
 
 To try the code yourself, follow the instructions below.
 
