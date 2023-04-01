@@ -14,17 +14,15 @@ the observed state of the environment to two possible outputs:
    future. The part of the agent responsible for this output is the **critic**.
 Agent and Critic learn to perform their tasks, such that the recommended actions
 from the actor maximize the rewards.
-### CartPole-V0
-A pole is attached to a cart placed on a frictionless track. The agent has to apply
-force to move the cart. It is rewarded for every time step the pole
-remains upright. The agent, therefore, must learn to keep the pole from falling over.
+
 ### References
-- [CartPole](http://www.derongliu.org/adp/adp-cdrom/Barto1983.pdf)
 - [Actor Critic Method](https://hal.inria.fr/hal-00840470/document)
 """
 """
 ## Setup
 """
+
+import sys
 
 import numpy as np
 import tensorflow as tf
@@ -147,6 +145,9 @@ while True:  # Run until solved
         action_probs_history.clear()
         critic_value_history.clear()
         rewards_history.clear()
+
+        if "--test" in sys.argv:
+            sys.exit()
 
     # Log details
     episode_count += 1

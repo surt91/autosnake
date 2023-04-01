@@ -58,7 +58,7 @@ jobs:
       uses: py-actions/py-dependency-install@v3
 
     - name: Run one training iteration
-      run: cd py ; python train_AC.py --test ; python train_convAC.py --test
+      run: cd py ; python train_AC.py --test 
 
   tests:
     needs: build

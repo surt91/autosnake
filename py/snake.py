@@ -47,13 +47,20 @@ class Snake:
 
     # simple visualization to watch the training
     def render(self):
-        import pygame_sdl2 as pygame
-
         scale = 20
         w = self.snakeLogic.getWidth()
         h = self.snakeLogic.getHeight()
+        screen = None
 
-        screen = pygame.display.set_mode((w * scale, h * scale))
+        try:
+            import pygame
+            screen = pygame.display.set_mode((w * scale, h * scale))
+        except Exception as e:
+            if not hasattr(self, 'vis_failed'):
+                print("There are problems with the visualization.\nWe will try without for now.\nException:\n", e)
+                self.vis_failed = True
+            return
+
         pygame.draw.rect(
             screen,
             [0, 0, 0],
