@@ -1,4 +1,4 @@
-tensorflow==2.12.0
+tensorflow==2.12.1
 keras==2.12.0
 JPype1==1.4.1
 pygame==2.3.0
