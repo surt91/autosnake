@@ -52,13 +52,16 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.14'
+        python-version: '3.12'
 
-    - name: Install Python dependencies
-      uses: py-actions/py-dependency-install@v3
+    - name: Install uv
+      uses: astral-sh/setup-uv@v1
+
+    - name: Install Python dependencies with uv
+      run: uv sync
 
     - name: Run one training iteration
-      run: cd py ; python train_AC.py --test
+      run: cd py ; uv run train_AC.py --test
 
   tests:
     needs: build

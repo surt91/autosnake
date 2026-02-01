@@ -19,11 +19,11 @@ To try the code yourself, follow the instructions below.
 
 # install the python dependencies
 # (consider doing this in a virtual environment)
-pip3 install -r requirements.txt
+uv sync
 
 # train the model in Python using the Java classes
 cd py
-python3 train_AC.py
+uv run train_AC.py
 # optionally wait and copy the resulting *.h5 files to src/main/java/resources/models
 # it might take some time before the target score of 20 is reached
 # you might want to change it in line 139 of `py/train_AC.py`

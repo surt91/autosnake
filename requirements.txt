@@ -1,4 +1,0 @@
-tensorflow==2.20.0
-keras==3.13.1
-JPype1==1.5.0
-pygame==2.3.0
