@@ -52,13 +52,13 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: '3.14'
 
     - name: Install Python dependencies
       uses: py-actions/py-dependency-install@v3
 
     - name: Run one training iteration
-      run: cd py ; python train_AC.py --test 
+      run: cd py ; python train_AC.py --test
 
   tests:
     needs: build
