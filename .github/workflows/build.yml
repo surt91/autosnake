@@ -81,4 +81,4 @@ jobs:
         cache: maven
 
     - name: Unit and Integration Tests
-      run: mvn -Djavacpp.platform=linux-x86_64 verify
+      run: ./mvnw -Djavacpp.platform=linux-x86_64 verify
